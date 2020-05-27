@@ -22,7 +22,10 @@ public class SwingEvents {
         if (text.isEmpty()) {
             errorField.setText("Type something, you dummy!");
         } else {
-            // TODO: handler
+            Game.input = text;
+
+            // Otherwise the answer wont be checked
+            Game.inputIsEmpty = false;
 
             // Empties the text field so user doesn't have to delete old text
             field.setText("");

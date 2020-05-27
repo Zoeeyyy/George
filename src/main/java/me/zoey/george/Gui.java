@@ -27,6 +27,7 @@ public class Gui extends javax.swing.JFrame {
         errorField = new JTextField();
         logoField = new JTextField();
         storyField = new JTextField();
+        optionsField = new JTextField();
         jSeparator1 = new JSeparator();
 
         System.out.println(Main.class.getResource(""));
@@ -99,8 +100,12 @@ public class Gui extends javax.swing.JFrame {
         storyField.setFont(new java.awt.Font("Arial", 0, 18));
         storyField.setEditable(false);
         storyField.setBorder(null);
-        /* storyField.addMouseListener(drag);
-        storyField.addMouseMotionListener(drag); */
+
+        optionsField.setMargin(new Insets(0, 0, 0, 0));
+        optionsField.setBackground(new Color(172, 199, 178));
+        optionsField.setFont(new java.awt.Font("Arial", 0, 18));
+        optionsField.setEditable(false);
+        optionsField.setBorder(null);
 
 
         enterButton.setText("Say");
@@ -138,10 +143,6 @@ public class Gui extends javax.swing.JFrame {
                                                 .addGap(47, 47, 47))
                                         .addComponent(errorField, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(storyField)
-                                .addGap(47, 47, 47))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                                 .addGap(73, 73, 73)
                                 .addComponent(logoField)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -149,6 +150,12 @@ public class Gui extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
+                        .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(storyField, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+                                        .addComponent(optionsField))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
                 mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,8 +166,10 @@ public class Gui extends javax.swing.JFrame {
                                         .addComponent(logoField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(minusButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
-                                .addComponent(storyField, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
+                                .addComponent(storyField, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(optionsField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(errorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(textInputField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -193,9 +202,10 @@ public class Gui extends javax.swing.JFrame {
     private JButton enterButton;
     private JSeparator jSeparator1;
     private JTextField textInputField;
-    private JTextField errorField;
-    private JTextField storyField;
+    public JTextField errorField;
+    public JTextField storyField;
     private JTextField logoField;
+    public JTextField optionsField;
 
     private ImageIcon closeIcon;
     private ImageIcon minusIcon;
