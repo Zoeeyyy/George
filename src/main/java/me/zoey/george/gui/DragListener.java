@@ -1,5 +1,6 @@
 package me.zoey.george.gui;
 
+import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -9,16 +10,23 @@ public class DragListener extends MouseInputAdapter {
     MouseEvent pressed;
 
     public void mousePressed(MouseEvent me) {
+        // Sets the new mouse event that gets used in mouseDragged
         pressed = me;
     }
 
     public void mouseDragged(MouseEvent me) {
-        // TODO: make sure u can drag using other components too this sucks!
-        Component component = me.getComponent();
-        location = component.getLocation(location);
+        // Gets the frame that gets dragged
+        Component component = (Component) me.getSource();
+        JFrame frame = (JFrame) SwingUtilities.getRoot(component);
 
+        // Gets the current location of the frame
+        location = frame.getLocation(location);
+
+        // Calculates the new location
         int x = location.x - pressed.getX() + me.getX();
         int y = location.y - pressed.getY() + me.getY();
-        component.setLocation(x, y);
+
+        // Sets the new location
+        frame.setLocation(x, y);
     }
 }

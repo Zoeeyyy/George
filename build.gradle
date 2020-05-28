@@ -29,6 +29,7 @@ dependencies {
 launch4j {
     headerType="gui"
     mainClassName = 'me.zoey.george.Main'
+    companyName = "Zoezo"
 }
 
 compileJava.options.encoding = 'UTF-8'

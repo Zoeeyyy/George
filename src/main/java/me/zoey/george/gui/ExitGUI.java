@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class ExitGUI extends javax.swing.JFrame {
 
@@ -14,6 +15,7 @@ public ExitGUI() {
         }
 
 private void initComponents() {
+        DragListener drag = new DragListener();
         SwingEvents event = new SwingEvents();
         Color backgroundColor = new Color(212, 215, 220);
         String imagePath = "Images/Icons/";
@@ -31,8 +33,9 @@ private void initComponents() {
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
-
         setAlwaysOnTop(true);
+        addMouseListener(drag);
+        addMouseMotionListener(drag);
         toFront();
 
         backgroundPanel.setBackground(backgroundColor);
@@ -45,6 +48,8 @@ private void initComponents() {
         yesButton.setMargin(new Insets(0,0,0,0));
         yesButton.setContentAreaFilled(false);
         yesButton.setCursor(cursor);
+        yesButton.addMouseListener(drag);
+        yesButton.addMouseMotionListener(drag);
         yesButton.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
                         event.yesButtonMouseClicked(evt);
@@ -59,6 +64,8 @@ private void initComponents() {
         noButton.setMargin(new Insets(0,0,0,0));
         noButton.setContentAreaFilled(false);
         noButton.setCursor(cursor);
+        noButton.addMouseListener(drag);
+        noButton.addMouseMotionListener(drag);
         noButton.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent evt) {
                         event.noButtonMouseClicked(evt);
@@ -69,6 +76,8 @@ private void initComponents() {
         areYouSureLabel.setText("Are you sure?");
         areYouSureLabel.setHorizontalAlignment(SwingConstants.CENTER);
         areYouSureLabel.setFont(new java.awt.Font("Arial", 0, 18));
+        areYouSureLabel.addMouseListener(drag);
+        areYouSureLabel.addMouseMotionListener(drag);
 
         GroupLayout backgroundPanelLayout = new GroupLayout(backgroundPanel);
         backgroundPanel.setLayout(backgroundPanelLayout);

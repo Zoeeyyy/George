@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 
 public class MainGUI extends javax.swing.JFrame {
 
@@ -34,16 +36,11 @@ public class MainGUI extends javax.swing.JFrame {
         storyField = new JTextField();
         optionsField = new JTextField();
         jSeparator1 = new JSeparator();
+        closeIcon = new ImageIcon(Main.class.getResource(imagePath + "Close.png"));
+        minusIcon = new ImageIcon(Main.class.getResource(imagePath + "Minus.png"));
+        arrowIcon = new ImageIcon(Main.class.getResource(imagePath + "Arrow.png"));
+        settingsIcon = new ImageIcon(Main.class.getResource(imagePath + "Settings.png"));
 
-        System.out.println(Main.class.getResource(""));
-        try {
-            closeIcon = new ImageIcon(Main.class.getResource(imagePath + "Close.png"));
-            minusIcon = new ImageIcon(Main.class.getResource(imagePath + "Minus.png"));
-            arrowIcon = new ImageIcon(Main.class.getResource(imagePath + "Arrow.png"));
-            settingsIcon = new ImageIcon(Main.class.getResource(imagePath + "Settings.png"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -52,6 +49,14 @@ public class MainGUI extends javax.swing.JFrame {
         setResizable(false);
         addMouseListener(drag);
         addMouseMotionListener(drag);
+        addWindowFocusListener(new WindowFocusListener() {
+            public void windowGainedFocus(WindowEvent evt) {
+                event.formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(WindowEvent evt) {
+                event.formWindowLostFocus(evt);
+            }
+        });
 
         mainPanel.setBackground(backgroundColor);
 
@@ -103,6 +108,8 @@ public class MainGUI extends javax.swing.JFrame {
         logoField.setForeground(new java.awt.Color(212, 72, 0));
         logoField.setBorder(null);
         logoField.setText("G E O R G E");
+        logoField.addMouseListener(drag);
+        logoField.addMouseMotionListener(drag);
         logoField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 event.logoFieldMouseClicked(evt, logoField);
@@ -111,9 +118,11 @@ public class MainGUI extends javax.swing.JFrame {
 
         storyField.setMargin(new Insets(0, 0, 0, 0));
         storyField.setBackground(backgroundColor);
-        storyField.setFont(new java.awt.Font("Arial", 0, 24));
+        storyField.setFont(new java.awt.Font("Arial", 0, 20));
         storyField.setEditable(false);
         storyField.setBorder(null);
+        storyField.addMouseListener(drag);
+        storyField.addMouseMotionListener(drag);
 
         optionsField.setMargin(new Insets(0, 0, 0, 0));
         optionsField.setBackground(backgroundColor);
@@ -143,6 +152,11 @@ public class MainGUI extends javax.swing.JFrame {
         settingsButton.setMargin(new Insets(0,0,0,0));
         settingsButton.setContentAreaFilled(false);
         settingsButton.setCursor(cursor);
+        settingsButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                event.settingsButtonMouseClicked(evt);
+            }
+        });
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
@@ -159,28 +173,27 @@ public class MainGUI extends javax.swing.JFrame {
                                                 .addComponent(textInputField, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(47, 47, 47))
                                         .addComponent(errorField, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                                .addGap(73, 73, 73)
-                                .addComponent(logoField)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(settingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(minusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
                         .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addGap(23, 23, 23)
+                                .addGap(454, 454, 454)
+                                .addComponent(enterButton, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                                .addGap(34, 34, 34))
+                        .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addGap(73, 73, 73)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                                                .addComponent(logoField)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(settingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(10, 10, 10)
+                                                .addComponent(minusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(mainPanelLayout.createSequentialGroup()
-                                                .addGap(431, 431, 431)
-                                                .addComponent(enterButton, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-                                                .addGap(34, 34, 34))
-                                        .addGroup(mainPanelLayout.createSequentialGroup()
-                                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(storyField, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
-                                                        .addComponent(optionsField))
-                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(optionsField, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(storyField, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
                 mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

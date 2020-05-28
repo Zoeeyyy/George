@@ -5,9 +5,6 @@ import me.zoey.george.gui.MainGUI;
 import java.awt.*;
 
 public class Game {
-    public static String input = null;
-    public static Boolean inputIsEmpty = true;
-
     private static String username;
 
 
