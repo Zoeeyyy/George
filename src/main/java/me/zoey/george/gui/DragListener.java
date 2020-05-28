@@ -1,6 +1,5 @@
-package me.zoey.george;
+package me.zoey.george.gui;
 
-import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
 import java.awt.event.MouseEvent;

@@ -1,13 +1,15 @@
-package me.zoey.george;
+package me.zoey.george.game;
+
+import me.zoey.george.gui.MainGUI;
 
 import java.awt.*;
 
-import static me.zoey.george.Game.inputIsEmpty;
-import static me.zoey.george.Game.input;
+import static me.zoey.george.game.Game.inputIsEmpty;
+import static me.zoey.george.game.Game.input;
 
 public class GameLogic {
 
-    public String awaitAnswer (Boolean openAnswer, String answer1, String answer2, Gui gui) throws InterruptedException {
+    public String awaitAnswer (Boolean openAnswer, String answer1, String answer2, MainGUI gui) throws InterruptedException {
         Boolean canContinue = false;
 
         if (openAnswer.equals(false)) {
@@ -49,7 +51,7 @@ public class GameLogic {
         return null;
     }
 
-    public void sendText (String text, Color textColor, Gui gui) {
+    public void sendText (String text, Color textColor, MainGUI gui) {
         String textOut = "";
 
         if (textColor != null) {

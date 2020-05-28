@@ -1,10 +1,14 @@
 package me.zoey.george;
 
+import me.zoey.george.game.Game;
+import me.zoey.george.gui.MainGUI;
+
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        Gui gui = new Gui();
-        gui.setVisible(true);
-        // new Gui().setVisible(true);
-        new Game().Game(gui);
+        MainGUI mainGUI = new MainGUI();
+        mainGUI.setVisible(true);
+
+        new Game().Game(mainGUI);
+
     }
 }

@@ -1,13 +1,15 @@
-package me.zoey.george;
+package me.zoey.george.gui;
+
+import me.zoey.george.Main;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Gui extends javax.swing.JFrame {
+public class MainGUI extends javax.swing.JFrame {
 
-    public Gui() {
+    public MainGUI() {
         initComponents();
     }
 
@@ -17,6 +19,8 @@ public class Gui extends javax.swing.JFrame {
 
         String imagePath = "Images/Icons/";
 
+        Color backgroundColor = new Color(242, 243, 245);
+
         Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
 
         mainPanel = new javax.swing.JPanel();
@@ -25,7 +29,7 @@ public class Gui extends javax.swing.JFrame {
         enterButton = new JButton();
         textInputField = new JTextField();
         errorField = new JTextField();
-        logoField = new JTextField();
+        logoField = new JLabel();
         storyField = new JTextField();
         optionsField = new JTextField();
         jSeparator1 = new JSeparator();
@@ -47,7 +51,7 @@ public class Gui extends javax.swing.JFrame {
         addMouseListener(drag);
         addMouseMotionListener(drag);
 
-        mainPanel.setBackground(new Color(172, 199, 178));
+        mainPanel.setBackground(backgroundColor);
 
         closeButton.setIcon(closeIcon);
         closeButton.setBorderPainted(false);
@@ -75,34 +79,37 @@ public class Gui extends javax.swing.JFrame {
 
 
         textInputField.setFont(new java.awt.Font("Arial", 0, 18));
-        textInputField.setBackground(new Color(172, 199, 178));
+        textInputField.setBackground(backgroundColor);
         textInputField.setBorder(null);
         textInputField.setMargin(new Insets(0,0,0,0));
         textInputField.setText("");
 
         errorField.setFont(new java.awt.Font("Arial", 0, 18));
-        errorField.setBackground(new Color(172, 199, 178));
+        errorField.setBackground(backgroundColor);
         errorField.setBorder(null);
         errorField.setMargin(new Insets(0,0,0,0));
         errorField.setText("");
         errorField.setEditable(false);
 
         logoField.setFont(new java.awt.Font("Tahoma", 1, 36));
-        logoField.setBackground(new Color(172, 199, 178));
+        logoField.setBackground(backgroundColor);
         logoField.setForeground(new java.awt.Color(212, 72, 0));
         logoField.setBorder(null);
-        logoField.setMargin(new Insets(0, 0, 0, 0));
-        logoField.setEditable(false);
         logoField.setText("G E O R G E");
+        logoField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                event.logoFieldMouseClicked(evt, logoField);
+            }
+        });
 
         storyField.setMargin(new Insets(0, 0, 0, 0));
-        storyField.setBackground(new Color(172, 199, 178));
-        storyField.setFont(new java.awt.Font("Arial", 0, 18));
+        storyField.setBackground(backgroundColor);
+        storyField.setFont(new java.awt.Font("Arial", 0, 24));
         storyField.setEditable(false);
         storyField.setBorder(null);
 
         optionsField.setMargin(new Insets(0, 0, 0, 0));
-        optionsField.setBackground(new Color(172, 199, 178));
+        optionsField.setBackground(backgroundColor);
         optionsField.setFont(new java.awt.Font("Arial", 0, 18));
         optionsField.setEditable(false);
         optionsField.setBorder(null);
@@ -196,20 +203,20 @@ public class Gui extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
-    private JPanel mainPanel;
-    private JButton closeButton;
-    private JButton minusButton;
-    private JButton enterButton;
-    private JSeparator jSeparator1;
-    private JTextField textInputField;
+    public JPanel mainPanel;
+    public JButton closeButton;
+    public JButton minusButton;
+    public JButton enterButton;
+    public JSeparator jSeparator1;
+    public JTextField textInputField;
     public JTextField errorField;
     public JTextField storyField;
-    private JTextField logoField;
+    public JLabel logoField;
     public JTextField optionsField;
 
-    private ImageIcon closeIcon;
-    private ImageIcon minusIcon;
-    private ImageIcon arrowIcon;
+    public ImageIcon closeIcon;
+    public ImageIcon minusIcon;
+    public ImageIcon arrowIcon;
 
 
 
