@@ -1,5 +1,7 @@
 package me.zoey.george.gui;
 
+import me.zoey.george.EmptyStringException;
+import me.zoey.george.game.Game;
 import me.zoey.george.game.GameLogic;
 
 import javax.swing.*;
@@ -16,7 +18,7 @@ public class SwingEvents {
     // When the close button is clicked
     public void closeButtonMouseClicked(MouseEvent evt) {
         // Pauses the game when you go to exit
-        GameLogic.isGamePaused = true;
+        GameLogic.setIsGamePaused(true);
 
         // Opens the exit gui so you can confirm or cancel and makes it visible
         ExitGUI exitGUI = new ExitGUI();
@@ -34,27 +36,29 @@ public class SwingEvents {
     }
 
     // When the say button is clicked
-    public void enterButtonMouseClicked(MouseEvent evt, JTextField field, JTextField errorField) {
+    public void enterButtonMouseClicked(MouseEvent evt) {
+        MainGUI gui = Game.getMainGUI();
+
         // Gets the input from the text field
-        String text = field.getText();
+        String text = gui.getTextInputFieldText();
 
-        // If the input is empty it will display an error message
-        if (text.isEmpty()) {
-            // ErrorMessage
-            errorField.setText("Type something, you dummy!");
-        } else {
-            // If the input isn't empty it will be sent to GameLogic
-            GameLogic.input = text;
-
-            // Otherwise the answer wont be checked
-            GameLogic.inputIsEmpty = false;
-
-            // Empties the text field so user doesn't have to delete old text
-            field.setText("");
-
-            // Removes error message if there is one
-            errorField.setText("");
+        // Tries to set the input
+        try {
+            GameLogic.setInput(text);
+            // If its empty it' catch the exception and sends an error message
+        } catch (EmptyStringException e) {
+            gui.setErrorFieldText("Type something, you dummy!");
+            return;
         }
+
+        // Otherwise the answer wont be checked
+        GameLogic.setIsInputEmpty(false);
+
+        // Empties the text field so user doesn't have to delete old text
+        gui.setTextInputFieldText("");
+
+        // Removes error message if there is one
+        gui.setErrorFieldText("");
     }
 
     // When the user clicks on the logo
@@ -84,38 +88,38 @@ public class SwingEvents {
         JFrame frame = (JFrame) SwingUtilities.getRoot(component);
 
         // Resumes the game since the user cancelled closing the game
-        GameLogic.isGamePaused = false;
+        GameLogic.setIsGamePaused(false);
 
         // Closes the frame
         frame.dispose();
     }
 
     // When the user presses enter in the input field
-    public void textInputFieldKeyPressed(KeyEvent evt, JTextField field, JTextField errorField) {
+    public void textInputFieldKeyPressed(KeyEvent evt) {
+        MainGUI gui = Game.getMainGUI();
         // Retrieves the text from the textfield
-        String text = field.getText();
+        String text = gui.getTextInputFieldText();
 
         // If enter was pressed
         if (evt.getKeyCode() == 10) {
 
-            // If the input is empty it sends an error message
-            if (text.isEmpty()) {
-                // Error message
-                errorField.setText("Type something, you dummy!");
-            } else {
-
-                // If the input isn't empty it will be send to GameLogic
-                GameLogic.input = text;
-
-                // Otherwise the answer wont be checked
-                GameLogic.inputIsEmpty = false;
-
-                // Empties the text field so user doesn't have to delete old text
-                field.setText("");
-
-                // Removes error message if there is one
-                errorField.setText("");
+            // Tries to set the input
+            try {
+                GameLogic.setInput(text);
+                // If its empty it' catch the exception and sends an error message
+            } catch (EmptyStringException e) {
+                gui.setErrorFieldText("Type something, you dummy!");
+                return;
             }
+
+            // Otherwise the answer wont be checked
+            GameLogic.setIsInputEmpty(false);
+
+            // Empties the text field so user doesn't have to delete old text
+            gui.setTextInputFieldText("");
+
+            // Removes error message if there is one
+            gui.setErrorFieldText("");
         }
     }
 
@@ -126,7 +130,7 @@ public class SwingEvents {
         JFrame frame = (JFrame) SwingUtilities.getRoot(component);
 
         // Resumes the game since the settings tab got closed
-        GameLogic.isGamePaused = false;
+        GameLogic.setIsGamePaused(false);
 
         // Closes the frame
         frame.dispose();
@@ -135,7 +139,7 @@ public class SwingEvents {
     // When the settings get opened
     public void settingsButtonMouseClicked(MouseEvent evt) {
         // When you open the settings GUI the game gets paused
-        GameLogic.isGamePaused = true;
+        GameLogic.setIsGamePaused(true);
 
         // Creates a new GUI and makes it visible
         SettingsGUI settingsGUI = new SettingsGUI();
@@ -145,12 +149,12 @@ public class SwingEvents {
     // When the main GUI loses focus
     public void formWindowLostFocus(java.awt.event.WindowEvent evt) {
         // When the window is minimized it pauses the game
-        GameLogic.isGamePaused = true;
+        GameLogic.setIsGamePaused(true);
     }
 
     // When the main GUI gains focus
     public void formWindowGainedFocus(java.awt.event.WindowEvent evt) {
         // Resumes the game when the window has gained focus
-        GameLogic.isGamePaused = false;
+        GameLogic.setIsGamePaused(false);
     }
 }

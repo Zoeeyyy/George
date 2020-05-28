@@ -1,24 +1,26 @@
 package me.zoey.george.game;
 
 
+import me.zoey.george.EmptyStringException;
 import me.zoey.george.gui.MainGUI;
 import java.awt.*;
 
 // This class contains all the game logic
 public class GameLogic {
-    public static Boolean inputIsEmpty;
-    public static Boolean isGamePaused;
+    private static Boolean isInputEmpty;
+    private static Boolean isGamePaused;
 
-    public static String input;
+    private static String input;
 
     // When you need to await an answer from the user
-    public String awaitAnswer (Boolean openAnswer, String answer1, String answer2, MainGUI gui) throws InterruptedException {
+    public String awaitAnswer (Boolean openAnswer, String answer1, String answer2) throws InterruptedException {
         // Resets the input
-        inputIsEmpty = true;
+        isInputEmpty = true;
+        MainGUI gui = Game.getMainGUI();
 
         // When you don't have an open question the gui will display the options you have
         if (openAnswer.equals(false)) {
-            gui.optionsField.setText("Options: [" + answer1 + "][" + answer2 + "]");
+            gui.setOptionsFielText("Options: [" + answer1 + "][" + answer2 + "]");
         }
 
         // This will loop till you get the result you need (an answer)
@@ -27,7 +29,7 @@ public class GameLogic {
             Thread.sleep(200);
 
             // If input is empty it will wait till we get an answer from the user
-            if (!inputIsEmpty.equals(true)) {
+            if (!isInputEmpty.equals(true)) {
 
                 // If it isn't an open question
                 if (openAnswer.equals(false)) {
@@ -46,9 +48,9 @@ public class GameLogic {
                     } else {
 
                         // Displays error message
-                        gui.errorField.setText("This doesn't match '" + answer1 + "' or '" + answer2 + "'!");
+                        gui.setErrorFieldText("This doesn't match '" + answer1 + "' or '" + answer2 + "'!");
                         // Resets the input
-                        inputIsEmpty = true;
+                        isInputEmpty = true;
                     }
                 // If it is an open question
                 } else {
@@ -61,15 +63,16 @@ public class GameLogic {
     }
 
     // When you need to send text to the screen
-    public void sendText (String text, Color textColor, MainGUI gui) throws InterruptedException {
+    public static void sendText (String text, Color textColor) throws InterruptedException {
         // Create's an empty string
         String textOut = "";
+        MainGUI gui = Game.getMainGUI();
 
         // If the textColor isn't null
         if (textColor != null) {
             // Tries to set the colour to the specified colour but if it isn't a colour it catches the error
             try {
-                gui.storyField.setForeground(textColor);
+                gui.setStoryFieldColor(textColor);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -80,7 +83,7 @@ public class GameLogic {
             // Adds the text char to the string
             textOut += "" + text.charAt(i);
             // Prints the string, this creates a typing effect
-            gui.storyField.setText(textOut);
+            gui.setStoryFieldText(textOut);
 
 
             // while loop if the game is paused
@@ -99,4 +102,26 @@ public class GameLogic {
             Thread.sleep(100);
         }
     }
+
+    // Setter for input
+    public static void setInput(String input) throws EmptyStringException {
+        // If the input is empty throws an exception
+        if (input.isEmpty()) {
+            throw new EmptyStringException("");
+        }
+
+        // Updates input
+        GameLogic.input = input;
+    }
+
+    // Setter for isGamePaused
+    public static void setIsGamePaused(Boolean isGamePaused) {
+        GameLogic.isGamePaused = isGamePaused;
+    }
+
+    // Setter for isInputEmpty
+    public static void setIsInputEmpty(Boolean isInputEmpty) {
+        GameLogic.isInputEmpty = isInputEmpty;
+    }
 }
+

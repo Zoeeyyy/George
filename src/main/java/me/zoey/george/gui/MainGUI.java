@@ -92,7 +92,7 @@ public class MainGUI extends javax.swing.JFrame {
         textInputField.setText("");
         textInputField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                event.textInputFieldKeyPressed(evt, textInputField, errorField);
+                event.textInputFieldKeyPressed(evt);
             }
         });
 
@@ -110,8 +110,8 @@ public class MainGUI extends javax.swing.JFrame {
         logoField.setText("G E O R G E");
         logoField.addMouseListener(drag);
         logoField.addMouseMotionListener(drag);
-        logoField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        logoField.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
                 event.logoFieldMouseClicked(evt, logoField);
             }
         });
@@ -140,9 +140,9 @@ public class MainGUI extends javax.swing.JFrame {
         enterButton.setIcon(arrowIcon);
         enterButton.setHorizontalTextPosition(SwingConstants.LEFT);
         enterButton.setFont(new java.awt.Font("Arial", 0, 18));
-        enterButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                event.enterButtonMouseClicked(evt, textInputField, errorField);
+        enterButton.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                event.enterButtonMouseClicked(evt);
             }
         });
 
@@ -235,25 +235,46 @@ public class MainGUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
-    public JPanel mainPanel;
-    public JButton closeButton;
-    public JButton minusButton;
-    public JButton enterButton;
-    public JButton settingsButton;
-    public JSeparator jSeparator1;
-    public JTextField textInputField;
-    public JTextField errorField;
-    public JTextField storyField;
-    public JLabel logoField;
-    public JTextField optionsField;
+    private JPanel mainPanel;
+    private JButton closeButton;
+    private JButton minusButton;
+    private JButton enterButton;
+    private JButton settingsButton;
+    private JSeparator jSeparator1;
+    private JTextField textInputField;
+    private JTextField errorField;
 
-    public ImageIcon closeIcon;
-    public ImageIcon minusIcon;
-    public ImageIcon arrowIcon;
-    public ImageIcon settingsIcon;
+    private JTextField storyField;
+    private JLabel logoField;
+    private JTextField optionsField;
 
+    private ImageIcon closeIcon;
+    private ImageIcon minusIcon;
+    private ImageIcon arrowIcon;
+    private ImageIcon settingsIcon;
 
+    public void setStoryFieldText(String text) {
+        this.storyField.setText(text);
+    }
 
+    public void setStoryFieldColor(Color color) {
+        this.storyField.setForeground(color);
+    }
 
+    public void setOptionsFielText(String text) {
+        this.optionsField.setText(text);
+    }
+
+    public void setErrorFieldText(String text) {
+        this.errorField.setText(text);
+    }
+
+    public String getTextInputFieldText() {
+        return this.textInputField.getText();
+    }
+
+    public void setTextInputFieldText(String text) {
+        this.textInputField.setText(text);
+    }
 }
 

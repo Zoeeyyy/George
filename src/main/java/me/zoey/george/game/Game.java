@@ -6,19 +6,30 @@ import java.awt.*;
 
 public class Game {
     private static String username;
+    private static MainGUI mainGUI;
 
 
     public void Game(MainGUI gui) throws InterruptedException {
+        // Sets the mainGUI
+        mainGUI = gui;
+
+        // New GameLogic
         GameLogic g = new GameLogic();
 
-        g.sendText("Welcome traveler! What's your name?", Color.RED, gui);
+        // The actual game
 
-        username = g.awaitAnswer(true,null, null, gui);
+        GameLogic.sendText("Welcome traveler! What's your name?", Color.RED);
 
-        g.sendText("Hello, " + username + "! How are you?", null, gui);
+        username = g.awaitAnswer(true,null, null);
 
-        g.awaitAnswer(true, null, null, gui);
-        g.sendText("That's great " + username + "!", Color.PINK, gui);
+        g.sendText("Hello, " + username + "! How are you?", null);
 
+        g.awaitAnswer(true, null, null);
+        g.sendText("That's great " + username + "!", Color.PINK);
+
+    }
+
+    public static MainGUI getMainGUI() {
+        return Game.mainGUI;
     }
 }
