@@ -1,7 +1,12 @@
 package me.zoey.george.game;
 
+import me.zoey.george.Main;
 import me.zoey.george.gui.MainGUI;
 
+import javax.print.attribute.standard.NumberUp;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.awt.*;
 
 import static me.zoey.george.game.Game.inputIsEmpty;
@@ -11,6 +16,7 @@ public class GameLogic {
 
     public String awaitAnswer (Boolean openAnswer, String answer1, String answer2, MainGUI gui) throws InterruptedException {
         Boolean canContinue = false;
+        inputIsEmpty = true;
 
         if (openAnswer.equals(false)) {
             gui.optionsField.setText("Options: [" + answer1 + "][" + answer2 + "]");

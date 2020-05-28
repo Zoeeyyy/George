@@ -27,6 +27,7 @@ public class MainGUI extends javax.swing.JFrame {
         closeButton = new JButton();
         minusButton = new JButton();
         enterButton = new JButton();
+        settingsButton = new JButton();
         textInputField = new JTextField();
         errorField = new JTextField();
         logoField = new JLabel();
@@ -39,6 +40,7 @@ public class MainGUI extends javax.swing.JFrame {
             closeIcon = new ImageIcon(Main.class.getResource(imagePath + "Close.png"));
             minusIcon = new ImageIcon(Main.class.getResource(imagePath + "Minus.png"));
             arrowIcon = new ImageIcon(Main.class.getResource(imagePath + "Arrow.png"));
+            settingsIcon = new ImageIcon(Main.class.getResource(imagePath + "Settings.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -83,6 +85,11 @@ public class MainGUI extends javax.swing.JFrame {
         textInputField.setBorder(null);
         textInputField.setMargin(new Insets(0,0,0,0));
         textInputField.setText("");
+        textInputField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                event.textInputFieldKeyPressed(evt, textInputField, errorField);
+            }
+        });
 
         errorField.setFont(new java.awt.Font("Arial", 0, 18));
         errorField.setBackground(backgroundColor);
@@ -130,6 +137,13 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
+        settingsButton.setIcon(settingsIcon);
+        settingsButton.setBorderPainted(false);
+        settingsButton.setBorder(null);
+        settingsButton.setMargin(new Insets(0,0,0,0));
+        settingsButton.setContentAreaFilled(false);
+        settingsButton.setCursor(cursor);
+
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
 
@@ -137,10 +151,6 @@ public class MainGUI extends javax.swing.JFrame {
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
                 mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                                .addGap(459, 459, 459)
-                                .addComponent(enterButton, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                                .addGap(34, 34, 34))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,16 +163,24 @@ public class MainGUI extends javax.swing.JFrame {
                                 .addGap(73, 73, 73)
                                 .addComponent(logoField)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(settingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
                                 .addComponent(minusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
                         .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addGap(23, 23, 23)
-                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(storyField, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
-                                        .addComponent(optionsField))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(mainPanelLayout.createSequentialGroup()
+                                                .addGap(431, 431, 431)
+                                                .addComponent(enterButton, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                                                .addGap(34, 34, 34))
+                                        .addGroup(mainPanelLayout.createSequentialGroup()
+                                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(storyField, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+                                                        .addComponent(optionsField))
+                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         mainPanelLayout.setVerticalGroup(
                 mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,7 +189,8 @@ public class MainGUI extends javax.swing.JFrame {
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(closeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(logoField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(minusButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(minusButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(settingsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addComponent(storyField, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -207,6 +226,7 @@ public class MainGUI extends javax.swing.JFrame {
     public JButton closeButton;
     public JButton minusButton;
     public JButton enterButton;
+    public JButton settingsButton;
     public JSeparator jSeparator1;
     public JTextField textInputField;
     public JTextField errorField;
@@ -217,6 +237,7 @@ public class MainGUI extends javax.swing.JFrame {
     public ImageIcon closeIcon;
     public ImageIcon minusIcon;
     public ImageIcon arrowIcon;
+    public ImageIcon settingsIcon;
 
 
 

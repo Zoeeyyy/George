@@ -4,6 +4,7 @@ import me.zoey.george.game.Game;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -63,6 +64,28 @@ public class SwingEvents {
         JFrame frame = (JFrame) SwingUtilities.getRoot(component);
 
         frame.dispose();
+    }
+
+    public void textInputFieldKeyPressed(KeyEvent evt, JTextField field, JTextField errorField) {
+        String text = field.getText();
+
+        if (evt.getKeyCode() == 10) {
+
+            if (text.isEmpty()) {
+                errorField.setText("Type something, you dummy!");
+            } else {
+                Game.input = text;
+
+                // Otherwise the answer wont be checked
+                Game.inputIsEmpty = false;
+
+                // Empties the text field so user doesn't have to delete old text
+                field.setText("");
+
+                // Removes error message if there is one
+                errorField.setText("");
+            }
+        }
     }
 
 }
